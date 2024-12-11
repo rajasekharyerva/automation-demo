@@ -1,0 +1,42 @@
+name: Run Cucumber Tests Manually
+
+on:
+  workflow_dispatch: # Trigger the workflow manually
+
+jobs:
+  run-cucumber-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Java environment
+      - name: Setup Java
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin' # You can choose 'zulu' or 'adopt' if preferred
+          java-version: '17' # Use Java 17 as required
+
+      # Step 3: Cache Maven dependencies
+      - name: Cache Maven repository
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2/repository
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
+      # Step 4: Run Maven to build and execute tests
+      - name: Run Cucumber Tests
+        run: |
+          mvn clean verify -Dcucumber.options="--plugin pretty --plugin html:target/cucumber-html-reports.html --plugin json:target/cucumber.json"
+
+      # Step 5: Upload HTML Reports (Optional)
+      - name: Upload Cucumber HTML Report
+        if: always()
+        uses: actions/upload-artifact@v3
+        with:
+          name: cucumber-html-report
+          path: target/cucumber-html-reports.html
