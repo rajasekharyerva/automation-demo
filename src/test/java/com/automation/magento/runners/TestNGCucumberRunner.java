@@ -8,7 +8,6 @@ import io.cucumber.testng.CucumberOptions;
         glue = "com.automation.magento.stepDefinitions",
         plugin = {"pretty", "html:target/cucumber-html-reports.html","json:target/cucumber.json"},
         dryRun = false,
-        //tags = "",
         monochrome = true
 )
 public class TestNGCucumberRunner extends AbstractTestNGCucumberTests {
