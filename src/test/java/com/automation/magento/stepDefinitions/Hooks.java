@@ -14,6 +14,8 @@ public class Hooks {
         chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--no-sandbox");
         chromeOptions.addArguments("--disable-dev-shm-usage");
+        chromeOptions.addArguments("start-maximized"); // Optional, but can help with visibility issues
+        chromeOptions.addArguments("--disable-gpu"); // Disable GPU acceleration (useful in headless mode)
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
     }
