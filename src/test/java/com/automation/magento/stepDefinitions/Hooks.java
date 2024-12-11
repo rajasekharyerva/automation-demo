@@ -12,6 +12,8 @@ public class Hooks {
     public void openBrowser() {
         ChromeOptions chromeOptions = new ChromeOptions();
         chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--no-sandbox");
+        chromeOptions.addArguments("--disable-dev-shm-usage");
         webDriver = new ChromeDriver();
         webDriver.manage().window().maximize();
     }
