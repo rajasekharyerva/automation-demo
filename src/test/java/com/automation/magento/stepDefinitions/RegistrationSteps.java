@@ -4,6 +4,8 @@ import com.automation.magento.pages.RegistrationPage;
 import com.automation.magento.utilites.Utility;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Then;
+import static com.automation.magento.utilites.Utility.email;
+import static com.automation.magento.utilites.Utility.password;
 
 import java.util.logging.Logger;
 
@@ -16,9 +18,13 @@ public class RegistrationSteps {
 
     @And("enters First Name {string}, Last Name {string}, Email {string}, Password {string}, Confirm Password{string}")
     public void entersFirstNameLastNameEmailPasswordConfirmPassword(String firstName, String lastName, String email, String password, String confirmPassword) {
+        Utility.firstName = firstName;
+        Utility.lastName = lastName;
+        Utility.email = Utility.appendEmailWithTimeStamp(email);
+        Utility.password = password;
+
         entersFirstNameLastName(firstName, lastName);
-        email = Utility.appendEmailWithTimeStamp(email);
-        entersEmail(email);
+        entersEmail(Utility.email);
         entersPasswordConfirmPassword(password, confirmPassword);
     }
 

@@ -43,7 +43,6 @@ public class HomePageSteps {
 
     @Then("user should see a welcome user message {string}")
     public void userShouldSeeAWelcomeUserMessage(String firstname) {
-
         assertEquals(homePage.getLoggedInUser(), "Welcome, "+firstname+"!", "Welcome message not matched");
 
     }
@@ -53,5 +52,15 @@ public class HomePageSteps {
         logger.info("Clicking on Sign Out link");
         homePage.clickSwitchButton();
         homePage.clickSignOut();
+    }
+
+    @Then("user should see a welcome static user message {string}")
+    public void userShouldSeeAWelcomeStaticUserMessage(String username) {
+        //Check username is empty, taking it from static value if stored
+        if (username.isEmpty()) {
+            username = com.automation.magento.utilites.Utility.firstName + " " + com.automation.magento.utilites.Utility.lastName;
+        }
+        assertEquals(homePage.getLoggedInUser(), "Welcome, "+username+"!", "Welcome message not matched");
+
     }
 }

@@ -32,4 +32,19 @@ public class LoginSteps {
         logger.info("Getting error message");
         assertEquals(loginPage.getErrorMessage(), errorMessage, "Error message not matched");
     }
+
+    @And("enters static Email {string}, static Password {string}")
+    public void entersStaticEmailStaticPassword(String email, String password) {
+        // Checks if email is empty, taking it from static value if stored
+        if (email.isEmpty()) {
+            email = com.automation.magento.utilites.Utility.email;
+        }
+        // Checks if password is empty, taking it from static value if stored
+        if (password.isEmpty()) {
+            password = com.automation.magento.utilites.Utility.password;
+        }
+
+        entersEmailPassword(email, password);
+    }
+
 }

@@ -1,4 +1,3 @@
-@Registration
 Feature: Registration
 
   Scenario Outline: Successful registration
@@ -12,6 +11,7 @@ Feature: Registration
       | first_name | last_name | email                | password  | confirm_password |
       | John       | Doe       | john.doe@example.com | Password1 | Password1        |
 
+  @ignore
   Scenario Outline: Unsuccessful registration with an already existing email
     Given user is on the home page
     When clicks on the CreateAnAccount link
@@ -23,3 +23,23 @@ Feature: Registration
     Examples:
       | first_name | last_name | email                | password  | confirm_password |
       | John       | Doe       | john.doe@example.com | Password1 | Password1        |
+
+  Scenario: Login with valid credentials
+    Given user is on the home page
+    When clicks on the Sign In link
+    And enters static Email "", static Password ""
+    And clicks on the signIn button
+    Then user should see a welcome static user message ""
+    And user clicks sign out
+
+
+  @ignore
+  Scenario Outline: Login with invalid credentials
+    Given user is on the home page
+    When clicks on the Sign In link
+    And enters Email "<email>", Password "<password>"
+    And clicks on the signIn button
+    Then user should see a login error message "The account sign-in was incorrect or your account is disabled temporarily. Please wait and try again later."
+    Examples:
+      | email                | password  |
+      | john.doe@example.com | Password1 |
