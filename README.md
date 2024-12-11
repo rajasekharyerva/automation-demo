@@ -69,3 +69,4 @@ This project contains automation tests for the Magento website using **Cucumber*
 ### Running Tests with GitHub Actions:
 
 - The tests are configured to run on **GitHub Actions**. The CI workflow is located in `.github/workflows/cucumber-tests.yml`.
+- To run this need to update headless

@@ -28,6 +28,9 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-maven-
 
+      - name: Set CI environment variable
+        run: echo "CI=true" >> $GITHUB_ENV
+
       # Step 4: Run Maven to build and execute tests
       - name: Run Cucumber Tests
         run: |
