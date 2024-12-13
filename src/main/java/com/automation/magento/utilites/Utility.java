@@ -11,4 +11,11 @@ public class Utility {
         String domain = email.split("@")[1];
         return localPart + "+" + timeStamp + "@" + domain;
     }
+
+    public static String appendEmailWithRandomNumber(String email) {
+        double randomNumber = Math.random()*100000;
+        String localPart = email.split("@")[0];
+        String domain = email.split("@")[1];
+        return localPart + "+" + Math.ceil(randomNumber) + "@" + domain;
+    }
 }
